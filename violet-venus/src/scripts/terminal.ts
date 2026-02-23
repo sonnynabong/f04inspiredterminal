@@ -3,6 +3,7 @@
  */
 
 import { playSelect, playScreenChange, playPowerOn, playPowerOff, playEnter } from "./terminal-sounds";
+import { initBootTypingSounds, resetBootTypingAnimation } from "./boot-typing-sounds";
 
 type View = "boot" | "home" | "archives" | "skills" | "about" | "comms";
 
@@ -36,6 +37,12 @@ function showView(view: View) {
     triggerCRTFlash();
     if (!fromBoot) playScreenChange();
     targetEl.style.display = "flex";
+
+    if (view === "boot") {
+      resetBootTypingAnimation();
+      initBootTypingSounds();
+    }
+
     targetEl.classList.add("view-enter");
     targetEl.offsetHeight; // force reflow
     setTimeout(() => {
@@ -66,6 +73,7 @@ function showView(view: View) {
 function init() {
   if (!document.body.getAttribute("data-view")) {
     document.body.setAttribute("data-view", "boot");
+    initBootTypingSounds();
   }
   const enterBtn = document.getElementById("enter-terminal");
   const logoutBtn = document.getElementById("logout-btn");

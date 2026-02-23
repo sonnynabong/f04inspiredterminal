@@ -83,3 +83,9 @@ export function playPowerOn(): void {
 export function playPowerOff(): void {
   play("poweroff.mp3");
 }
+
+/** Typing character - for typewriter animations (lower volume, allows rapid fire) */
+export function playTypingChar(): void {
+  const idx = Math.floor(Math.random() * SINGLE.length);
+  play(SINGLE[idx], 0.15);
+}
