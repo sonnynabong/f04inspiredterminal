@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>RobCo Terminal Boot Screen</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=VT323&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind Config -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#13ec13",
+                        "background-light": "#050a05", /* Overriding to darker for this specific theme requirement */
+                        "background-dark": "#020502", /* Almost black for the terminal */
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "monospace"],
+                        "mono": ["VT323", "monospace"], /* Adding a fallback pixel font for the pure retro feel where needed */
+                    },
+                    borderRadius: {"DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem"},
+                    animation: {
+                        'pulse-fast': 'pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'flicker': 'flicker 0.15s infinite',
+                        'scanline': 'scanline 8s linear infinite',
+                        'typewriter': 'typewriter 2s steps(40) 1s 1 normal both',
+                    },
+                    keyframes: {
+                        flicker: {
+                            '0%': { opacity: '0.97' },
+                            '50%': { opacity: '1' },
+                            '100%': { opacity: '0.98' },
+                        },
+                        scanline: {
+                            '0%': { transform: 'translateY(-100%)' },
+                            '100%': { transform: 'translateY(100%)' }
+                        }
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        /* CRT Screen Effects */
+        .crt-overlay {
+            background: linear-gradient(
+                rgba(18, 16, 16, 0) 50%, 
+                rgba(0, 0, 0, 0.25) 50%
+            );
+            background-size: 100% 4px;
+            pointer-events: none;
+        }
+        
+        .crt-vignette {
+            background: radial-gradient(
+                circle, 
+                rgba(19, 236, 19, 0) 60%, 
+                rgba(0, 0, 0, 0.4) 90%, 
+                rgba(0, 0, 0, 0.8) 100%
+            );
+            pointer-events: none;
+        }
+
+        .text-glow {
+            text-shadow: 0 0 4px rgba(19, 236, 19, 0.7), 0 0 10px rgba(19, 236, 19, 0.5);
+        }
+
+        .box-glow {
+            box-shadow: 0 0 15px rgba(19, 236, 19, 0.2), inset 0 0 15px rgba(19, 236, 19, 0.1);
+        }
+
+        /* Custom Scrollbar for the terminal feel */
+        ::-webkit-scrollbar {
+            width: 12px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #020502; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #13ec13; 
+            border: 2px solid #020502;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #0fb30f; 
+        }
+
+        /* Typewriter Animation Classes */
+        .typing-1 { animation: typing 0.5s steps(30, end) forwards; opacity: 0; animation-delay: 0.2s; animation-fill-mode: forwards; white-space: nowrap; overflow: hidden; }
+        .typing-2 { animation: typing 1s steps(30, end) forwards; opacity: 0; animation-delay: 0.8s; animation-fill-mode: forwards; white-space: nowrap; overflow: hidden; }
+        .typing-3 { animation: typing 1s steps(40, end) forwards; opacity: 0; animation-delay: 2s; animation-fill-mode: forwards; white-space: nowrap; overflow: hidden; }
+        .typing-4 { animation: typing 0.5s steps(20, end) forwards; opacity: 0; animation-delay: 3.2s; animation-fill-mode: forwards; white-space: nowrap; overflow: hidden; }
+        .typing-5 { animation: typing 0.5s steps(20, end) forwards; opacity: 0; animation-delay: 3.8s; animation-fill-mode: forwards; white-space: nowrap; overflow: hidden; }
+        
+        .fade-in-delayed { opacity: 0; animation: fadeIn 0.5s forwards; animation-delay: 4.5s; }
+
+        @keyframes typing {
+            from { width: 0; opacity: 1; }
+            to { width: 100%; opacity: 1; }
+        }
+        
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        
+        .cursor-blink {
+            animation: blink 1s step-end infinite;
+        }
+
+        .progress-bar-fill {
+            animation: progressFill 4s steps(10, end) forwards;
+            animation-delay: 1s;
+            width: 0%;
+        }
+
+        @keyframes progressFill {
+            0% { width: 0%; }
+            20% { width: 15%; }
+            40% { width: 30%; }
+            60% { width: 70%; }
+            80% { width: 85%; }
+            100% { width: 100%; }
+        }
+    </style>
+</head>
+<body class="bg-background-dark text-primary min-h-screen flex flex-col overflow-hidden font-display selection:bg-primary selection:text-background-dark">
+<!-- CRT Overlay Effects -->
+<div class="fixed inset-0 z-50 pointer-events-none crt-overlay opacity-20"></div>
+<div class="fixed inset-0 z-50 pointer-events-none crt-vignette"></div>
+<!-- Main Content Container -->
+<div class="relative w-full h-screen flex flex-col p-4 md:p-12 lg:p-20 max-w-[1400px] mx-auto z-10 animate-flicker">
+<!-- Top Status Bar -->
+<div class="flex justify-between items-center border-b-2 border-primary/40 pb-2 mb-8 text-glow uppercase tracking-widest text-xs md:text-sm">
+<span class="flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">terminal</span>
+                ROBCO TERMINAL LINK
+            </span>
+<span>V 4.2.1</span>
+</div>
+<!-- Main Terminal Area -->
+<div class="flex-grow flex flex-col justify-center items-center relative">
+<!-- ASCII Logo -->
+<div class="mb-12 text-center hidden md:block opacity-90 text-glow select-none">
+<pre class="font-mono text-[10px] md:text-xs leading-[0.8] text-primary/80">      _______  _______  ______   _______  _______ 
+     (  ____ )(  ___  )(  ___ \ (  ____ \(  ___  )
+     | (    )|| (   ) || (   ) )| (    \/| (   ) |
+     | (____)|| |   | || (__/ / | |      | |   | |
+     |     __)| |   | ||  __ (  | |      | |   | |
+     | (\ (   | |   | || (  \ \ | |      | |   | |
+     | ) \ \__| (___) || )___) )| (____/\| (___) |
+     |/   \__/(_______)|/ \___/ (_______/(_______)
+            INDUSTRIES (TM) UNIFIED OPERATING SYSTEM
+                COPYRIGHT 2077 - 2078
+                </pre>
+</div>
+<!-- Mobile Logo (Simplified) -->
+<div class="mb-8 text-center md:hidden text-glow">
+<h1 class="text-4xl font-bold tracking-tighter border-4 border-primary p-2 inline-block">ROBCO</h1>
+<p class="text-xs tracking-[0.3em] mt-2">INDUSTRIES (TM)</p>
+</div>
+<!-- Boot Sequence Text -->
+<div class="w-full max-w-2xl font-mono text-lg md:text-xl tracking-wide space-y-2 mb-12">
+<div class="flex items-start">
+<span class="mr-2">&gt;</span>
+<p class="typing-1 border-r-2 border-primary/0">BOOTING LOADER V4.2.1...</p>
+</div>
+<div class="flex items-start">
+<span class="mr-2">&gt;</span>
+<p class="typing-2 border-r-2 border-primary/0">MEMORY CHECK: 640KB OK</p>
+</div>
+<div class="flex items-start">
+<span class="mr-2">&gt;</span>
+<p class="typing-3 border-r-2 border-primary/0">ESTABLISHING LINK TO CENTRAL MAINFRAME...</p>
+</div>
+<div class="flex items-start">
+<span class="mr-2">&gt;</span>
+<p class="typing-4 border-r-2 border-primary/0">LOADING BIOS...</p>
+</div>
+<div class="flex items-start text-primary font-bold">
+<span class="mr-2">&gt;</span>
+<p class="typing-5 border-r-2 border-primary/0 animate-pulse">[PROTECTRON PROTOCOLS ACTIVE]</p>
+</div>
+</div>
+<!-- Loading Bar -->
+<div class="w-full max-w-lg fade-in-delayed">
+<div class="flex justify-between text-xs mb-1 font-mono uppercase tracking-widest opacity-80">
+<span>System Initialization</span>
+<span>100%</span>
+</div>
+<div class="h-6 md:h-8 w-full border-2 border-primary p-1 box-glow relative overflow-hidden">
+<!-- Background Grid Pattern for the bar -->
+<div class="absolute inset-0 opacity-20" style="background-image: repeating-linear-gradient(90deg, transparent 0, transparent 10px, #13ec13 10px, #13ec13 12px);"></div>
+<!-- The Fill -->
+<div class="h-full bg-primary progress-bar-fill relative">
+<!-- Scanline inside the fill -->
+<div class="absolute inset-0 bg-white/20 w-full h-[1px] top-1/2 -translate-y-1/2"></div>
+</div>
+</div>
+<div class="mt-2 text-right font-mono text-xs opacity-60">
+                    0x84F2A9 :: COMPLETE
+                </div>
+</div>
+</div>
+<!-- Footer / Call to Action -->
+<div class="mt-auto pt-8 flex flex-col items-center justify-center fade-in-delayed" style="animation-delay: 5s;">
+<button class="group relative px-8 py-3 bg-primary/10 hover:bg-primary/20 border border-primary text-primary font-bold tracking-widest uppercase transition-all duration-300 hover:shadow-[0_0_20px_rgba(19,236,19,0.4)] focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-black">
+<span class="absolute top-0 left-0 w-2 h-2 border-t-2 border-l-2 border-primary -mt-1 -ml-1"></span>
+<span class="absolute top-0 right-0 w-2 h-2 border-t-2 border-r-2 border-primary -mt-1 -mr-1"></span>
+<span class="absolute bottom-0 left-0 w-2 h-2 border-b-2 border-l-2 border-primary -mb-1 -ml-1"></span>
+<span class="absolute bottom-0 right-0 w-2 h-2 border-b-2 border-r-2 border-primary -mb-1 -mr-1"></span>
+<span class="flex items-center gap-3">
+<span class="material-symbols-outlined animate-pulse">power_settings_new</span>
+                    Enter Terminal
+                </span>
+</button>
+<p class="mt-4 text-sm font-mono opacity-70 animate-pulse">
+                &gt; PRESS ANY KEY TO CONTINUE <span class="inline-block w-3 h-5 bg-primary align-middle ml-1 cursor-blink"></span>
+</p>
+</div>
+</div>
+<!-- Background decorative grid lines -->
+<div class="fixed inset-0 pointer-events-none z-0 opacity-10" style="background-image: linear-gradient(#13ec13 1px, transparent 1px), linear-gradient(90deg, #13ec13 1px, transparent 1px); background-size: 40px 40px;">
+</div>
+</body></html>
