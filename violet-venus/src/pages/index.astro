@@ -17,6 +17,9 @@ import TerminalFooter from '../components/TerminalFooter.astro';
     <!-- CRT Effects (always on) -->
     <CRTEffects showScanlineBar={true} intensity="medium" />
 
+    <!-- CRT flash overlay for transitions (controlled by JS) -->
+    <div id="crt-flash-overlay" class="fixed inset-0 z-[100] pointer-events-none opacity-0" aria-hidden="true"></div>
+
     <!-- Boot Screen -->
     <div id="boot-view" class="fixed inset-0 z-20 flex flex-col" style="display: flex;">
       <BootScreen onEnter="enter-terminal" />

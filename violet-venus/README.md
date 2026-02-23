@@ -34,3 +34,7 @@ npm run preview # Preview production build
 - `COMMS` / `COMMS_LINK` – Open contact links
 - `HOME` / `EXIT` – Return to main terminal
 - `BOOT` / `LOGOUT` – Return to boot screen
+
+## Sound Effects
+
+Terminal sound effects are from [hyper-robco](https://github.com/smiley/hyper-robco) by smiley (Fallout 3/NV terminal UI sounds, GPL-3.0).
