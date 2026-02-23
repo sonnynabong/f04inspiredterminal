@@ -1,10 +1,12 @@
 ---
 interface Props {
   showLogout?: boolean;
+  showBack?: boolean;
+  backButtonId?: string;
   user?: string;
 }
 
-const { showLogout = false, user = "ADMIN_OVERRIDE" } = Astro.props;
+const { showLogout = false, showBack = false, backButtonId = "back-btn", user = "ADMIN_OVERRIDE" } = Astro.props;
 ---
 
 <header class="border-b-2 border-[#13ec13]/30 p-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-[#13ec13]/5">
@@ -19,6 +21,16 @@ const { showLogout = false, user = "ADMIN_OVERRIDE" } = Astro.props;
     <p>COPYRIGHT 2077</p>
     <p>CLEARANCE: ADMINISTRATOR</p>
     <p class="text-[#13ec13] animate-pulse">STATUS: ONLINE</p>
+    {showBack && (
+      <button
+        id={backButtonId}
+        type="button"
+        class="group flex items-center gap-2 hover:bg-[#13ec13] hover:text-[#020502] px-3 py-1 mt-2 transition-colors border border-transparent hover:border-[#13ec13] rounded"
+      >
+        <span class="material-symbols-outlined text-sm">arrow_back</span>
+        <span>BACK</span>
+      </button>
+    )}
     {showLogout && (
       <button
         id="logout-btn"

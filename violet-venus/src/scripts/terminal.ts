@@ -2,9 +2,9 @@
  * Fallout 4 Terminal - View switching & keyboard navigation
  */
 
-type View = "boot" | "home" | "archives";
+type View = "boot" | "home" | "archives" | "skills" | "about" | "comms";
 
-const VIEW_IDS = ["boot-view", "home-view", "archives-view"] as const;
+const VIEW_IDS = ["boot-view", "home-view", "archives-view", "skills-view", "about-view", "comms-view"] as const;
 
 function showView(view: View) {
   VIEW_IDS.forEach((id) => {
@@ -18,6 +18,9 @@ function init() {
   const enterBtn = document.getElementById("enter-terminal");
   const logoutBtn = document.getElementById("logout-btn");
   const archivesBackBtn = document.getElementById("archives-back-btn");
+  const skillsBackBtn = document.getElementById("skills-back-btn");
+  const aboutBackBtn = document.getElementById("about-back-btn");
+  const commsBackBtn = document.getElementById("comms-back-btn");
   const navButtons = document.querySelectorAll("[data-nav]");
   const projectButtons = document.querySelectorAll("[data-project]");
   const terminalInput = document.getElementById("terminal-input") as HTMLInputElement | null;
@@ -28,15 +31,20 @@ function init() {
   // Logout goes back to boot
   logoutBtn?.addEventListener("click", () => showView("boot"));
 
-  // Back from archives to home
+  // Back to home
   archivesBackBtn?.addEventListener("click", () => showView("home"));
+  skillsBackBtn?.addEventListener("click", () => showView("home"));
+  aboutBackBtn?.addEventListener("click", () => showView("home"));
+  commsBackBtn?.addEventListener("click", () => showView("home"));
 
-  // Main menu nav - Projects goes to archives
+  // Main menu nav
   navButtons.forEach((btn) => {
     btn.addEventListener("click", () => {
       const nav = (btn as HTMLElement).dataset.nav;
       if (nav === "projects") showView("archives");
-      // else: skills, about, comms could show different content - for now stay on home or show archives
+      if (nav === "skills") showView("skills");
+      if (nav === "about") showView("about");
+      if (nav === "comms") showView("comms");
     });
   });
 
@@ -58,7 +66,7 @@ function init() {
       showView("home");
     }
     if (e.key === "Escape") {
-      if (view === "archives") showView("home");
+      if (view === "archives" || view === "skills" || view === "about" || view === "comms") showView("home");
       else if (view === "home") showView("boot");
     }
   });
@@ -68,6 +76,9 @@ function init() {
     if (e.key === "Enter") {
       const cmd = terminalInput?.value?.toUpperCase().trim();
       if (cmd === "PROJECTS" || cmd === "ARCHIVES") showView("archives");
+      if (cmd === "SKILLS" || cmd === "SKILLS_DB") showView("skills");
+      if (cmd === "ABOUT" || cmd === "ABOUT_USER") showView("about");
+      if (cmd === "COMMS" || cmd === "COMMS_LINK") showView("comms");
       if (cmd === "HOME" || cmd === "EXIT") showView("home");
       if (cmd === "BOOT" || cmd === "LOGOUT") showView("boot");
       terminalInput.value = "";

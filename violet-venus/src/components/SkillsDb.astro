@@ -1,0 +1,47 @@
+---
+const skills = [
+  { category: "FRONTEND", items: ["REACT", "VUE", "ASTRO", "TAILWIND", "TYPESCRIPT"], level: 92 },
+  { category: "BACKEND", items: ["NODE_JS", "PYTHON", "SQL", "REST_API", "GRAPHQL"], level: 85 },
+  { category: "DEVOPS", items: ["DOCKER", "GITHUB_ACTIONS", "AWS", "VERCEL", "CI_CD"], level: 78 },
+  { category: "TOOLS", items: ["GIT", "VS_CODE", "FIGMA", "POSTMAN", "LINUX"], level: 90 },
+];
+---
+
+<div class="flex-1 flex flex-col overflow-hidden">
+  <div class="flex-1 overflow-y-auto p-6">
+    <div class="max-w-3xl mx-auto space-y-8">
+      <div class="border-b-2 border-[#13ec13] pb-4 mb-6">
+        <h2 class="text-2xl md:text-3xl font-bold text-glow flex items-center gap-2">
+          <span class="material-symbols-outlined">memory</span>
+          SKILLS_DATABASE
+        </h2>
+        <p class="text-sm opacity-80 mt-1 font-mono-terminal">CLASSIFIED_CLEARANCE_LEVEL: 3</p>
+      </div>
+
+      {skills.map((skill) => (
+        <div class="border border-[#13ec13]/30 rounded-lg p-4 bg-[#13ec13]/5 hover:border-[#13ec13]/50 transition-colors">
+          <div class="flex justify-between items-center mb-2">
+            <h3 class="font-bold tracking-widest text-glow">{skill.category}</h3>
+            <span class="text-xs font-mono-terminal opacity-80">{skill.level}% LOADED</span>
+          </div>
+          <div class="w-full bg-[#13ec13]/20 h-2 rounded-full overflow-hidden mb-3">
+            <div class="bg-[#13ec13] h-full rounded-full transition-all" style={`width: ${skill.level}%`}></div>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            {skill.items.map((item) => (
+              <span class="bg-[#13ec13]/20 px-2 py-1 text-xs font-bold border border-[#13ec13]/30 rounded">
+                {item}
+              </span>
+            ))}
+          </div>
+        </div>
+      ))}
+
+      <div class="border border-[#13ec13]/30 p-4 rounded bg-black/40 font-mono-terminal text-xs opacity-90">
+        <p>&gt; SYS_QUERY: SKILLS_DB.VER</p>
+        <p>&gt; LAST_SYNC: 2077-10-23 14:32:01</p>
+        <p>&gt; INTEGRITY_CHECK: PASSED</p>
+      </div>
+    </div>
+  </div>
+</div>

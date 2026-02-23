@@ -7,6 +7,9 @@ A single-page Astro app replicating the RobCo Industries terminal from Fallout 4
 - **Boot Screen** – Typewriter boot sequence, loading bar, CRT effects
 - **Main Terminal** – Welcome message, project cards, main menu
 - **Project Archives** – Archived projects list with detail view
+- **Skills DB** – Skill categories with proficiency levels
+- **About User** – Profile, identity, location, bio
+- **Comms Link** – Contact links (GitHub, LinkedIn, email)
 
 ## Run
 
@@ -26,5 +29,8 @@ npm run preview # Preview production build
 ## Commands (in terminal footer)
 
 - `PROJECTS` / `ARCHIVES` – Open project archives
+- `SKILLS` / `SKILLS_DB` – Open skills database
+- `ABOUT` / `ABOUT_USER` – Open about profile
+- `COMMS` / `COMMS_LINK` – Open contact links
 - `HOME` / `EXIT` – Return to main terminal
 - `BOOT` / `LOGOUT` – Return to boot screen

@@ -1,0 +1,53 @@
+---
+const contacts = [
+  { id: "gh", label: "GITHUB", icon: "code", url: "https://github.com", status: "ONLINE" },
+  { id: "li", label: "LINKEDIN", icon: "business_center", url: "https://linkedin.com", status: "ONLINE" },
+  { id: "mail", label: "EMAIL", icon: "mail", url: "mailto:admin@vault111.rec", status: "ACTIVE" },
+];
+---
+
+<div class="flex-1 flex flex-col overflow-hidden">
+  <div class="flex-1 overflow-y-auto p-6">
+    <div class="max-w-3xl mx-auto space-y-8">
+      <div class="border-b-2 border-[#13ec13] pb-4 mb-6">
+        <h2 class="text-2xl md:text-3xl font-bold text-glow flex items-center gap-2">
+          <span class="material-symbols-outlined">mail</span>
+          COMMS_LINK
+        </h2>
+        <p class="text-sm opacity-80 mt-1 font-mono-terminal">ESTABLISH_CONNECTION // ENCRYPTED_CHANNEL</p>
+      </div>
+
+      <div class="space-y-4">
+        {contacts.map((contact) => (
+          <a
+            href={contact.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="block border border-[#13ec13]/30 p-4 rounded bg-[#13ec13]/5 hover:bg-[#13ec13]/15 hover:border-[#13ec13] transition-all group"
+          >
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-3">
+                <span class="material-symbols-outlined text-2xl text-[#13ec13] group-hover:scale-110 transition-transform">
+                  {contact.icon}
+                </span>
+                <div>
+                  <p class="font-bold tracking-widest group-hover:text-glow transition-shadow">{contact.label}</p>
+                  <p class="text-xs font-mono-terminal opacity-70">{contact.url}</p>
+                </div>
+              </div>
+              <span class="text-xs bg-[#13ec13] text-[#020502] px-2 py-0.5 rounded font-bold animate-pulse">
+                {contact.status}
+              </span>
+            </div>
+          </a>
+        ))}
+      </div>
+
+      <div class="border border-[#13ec13]/30 p-4 rounded bg-black/40 font-mono-terminal text-xs opacity-90">
+        <p>&gt; SECURITY: TLS_1.3_ACTIVE</p>
+        <p>&gt; PACKET_ENCRYPTION: VAULT_TEC_PROTOCOL</p>
+        <p>&gt; CONNECTION_TEST: PASSED <span class="animate-pulse">_</span></p>
+      </div>
+    </div>
+  </div>
+</div>

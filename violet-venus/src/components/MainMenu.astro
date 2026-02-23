@@ -1,9 +1,9 @@
 ---
 interface Props {
-  activeItem?: "projects" | "skills" | "about" | "comms";
+  activeItem?: "projects" | "skills" | "about" | "comms" | "";
 }
 
-const { activeItem = "projects" } = Astro.props;
+const { activeItem = "" } = Astro.props;
 
 const menuItems = [
   { id: "projects", label: "[ PROJECTS ]", icon: "folder" },

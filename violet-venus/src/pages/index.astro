@@ -6,6 +6,9 @@ import TerminalHeader from '../components/TerminalHeader.astro';
 import MainMenu from '../components/MainMenu.astro';
 import HomeContent from '../components/HomeContent.astro';
 import ProjectArchives from '../components/ProjectArchives.astro';
+import SkillsDb from '../components/SkillsDb.astro';
+import AboutUser from '../components/AboutUser.astro';
+import CommsLink from '../components/CommsLink.astro';
 import TerminalFooter from '../components/TerminalFooter.astro';
 ---
 
@@ -24,7 +27,7 @@ import TerminalFooter from '../components/TerminalFooter.astro';
       <div class="w-full h-full max-w-[1200px] mx-auto border-2 border-[#13ec13]/30 rounded-lg flex flex-col relative bg-[#0a110a] shadow-[0_0_20px_rgba(19,236,19,0.15)] overflow-hidden">
         <TerminalHeader showLogout={true} />
         <div class="flex-1 flex flex-col lg:flex-row overflow-hidden">
-          <MainMenu activeItem="projects" />
+          <MainMenu activeItem="" />
           <HomeContent />
         </div>
         <TerminalFooter showHints={false} />
@@ -70,6 +73,42 @@ import TerminalFooter from '../components/TerminalFooter.astro';
             SYSTEM ONLINE
           </div>
         </footer>
+      </div>
+    </div>
+
+    <!-- Skills DB Page -->
+    <div id="skills-view" class="fixed inset-0 z-20 flex flex-col" style="display: none;">
+      <div class="w-full h-full max-w-[1200px] mx-auto border-2 border-[#13ec13]/30 rounded-lg flex flex-col relative bg-[#0a110a] shadow-[0_0_20px_rgba(19,236,19,0.15)] overflow-hidden">
+        <TerminalHeader showLogout={false} showBack={true} backButtonId="skills-back-btn" />
+        <div class="flex-1 flex flex-col lg:flex-row overflow-hidden">
+          <MainMenu activeItem="skills" />
+          <SkillsDb />
+        </div>
+        <TerminalFooter showHints={true} />
+      </div>
+    </div>
+
+    <!-- About User Page -->
+    <div id="about-view" class="fixed inset-0 z-20 flex flex-col" style="display: none;">
+      <div class="w-full h-full max-w-[1200px] mx-auto border-2 border-[#13ec13]/30 rounded-lg flex flex-col relative bg-[#0a110a] shadow-[0_0_20px_rgba(19,236,19,0.15)] overflow-hidden">
+        <TerminalHeader showLogout={false} showBack={true} backButtonId="about-back-btn" />
+        <div class="flex-1 flex flex-col lg:flex-row overflow-hidden">
+          <MainMenu activeItem="about" />
+          <AboutUser />
+        </div>
+        <TerminalFooter showHints={true} />
+      </div>
+    </div>
+
+    <!-- Comms Link Page -->
+    <div id="comms-view" class="fixed inset-0 z-20 flex flex-col" style="display: none;">
+      <div class="w-full h-full max-w-[1200px] mx-auto border-2 border-[#13ec13]/30 rounded-lg flex flex-col relative bg-[#0a110a] shadow-[0_0_20px_rgba(19,236,19,0.15)] overflow-hidden">
+        <TerminalHeader showLogout={false} showBack={true} backButtonId="comms-back-btn" />
+        <div class="flex-1 flex flex-col lg:flex-row overflow-hidden">
+          <MainMenu activeItem="comms" />
+          <CommsLink />
+        </div>
+        <TerminalFooter showHints={true} />
       </div>
     </div>
   </div>
