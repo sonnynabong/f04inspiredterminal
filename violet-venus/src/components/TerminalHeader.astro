@@ -1,0 +1,33 @@
+---
+interface Props {
+  showLogout?: boolean;
+  user?: string;
+}
+
+const { showLogout = false, user = "ADMIN_OVERRIDE" } = Astro.props;
+---
+
+<header class="border-b-2 border-[#13ec13]/30 p-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-[#13ec13]/5">
+  <div class="flex items-center gap-3">
+    <span class="material-symbols-outlined text-4xl animate-pulse">terminal</span>
+    <div>
+      <h1 class="text-xl sm:text-2xl font-bold tracking-widest text-glow leading-none">ROBCO INDUSTRIES (TM)</h1>
+      <p class="text-xs tracking-[0.2em] opacity-80 mt-1">UNIFIED OPERATING SYSTEM // TERMLINK PROTOCOL</p>
+    </div>
+  </div>
+  <div class="flex flex-col items-end text-xs tracking-widest opacity-80 font-mono text-right gap-0">
+    <p>COPYRIGHT 2077</p>
+    <p>CLEARANCE: ADMINISTRATOR</p>
+    <p class="text-[#13ec13] animate-pulse">STATUS: ONLINE</p>
+    {showLogout && (
+      <button
+        id="logout-btn"
+        type="button"
+        class="group flex items-center gap-2 hover:bg-[#13ec13] hover:text-[#020502] px-3 py-1 mt-2 transition-colors border border-transparent hover:border-[#13ec13] rounded"
+      >
+        <span>LOGOUT</span>
+        <span class="material-symbols-outlined text-sm">logout</span>
+      </button>
+    )}
+  </div>
+</header>

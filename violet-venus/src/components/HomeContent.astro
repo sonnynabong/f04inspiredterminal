@@ -1,0 +1,73 @@
+---
+// Home screen content - welcome message and project cards
+---
+
+<main class="flex-1 p-6 lg:p-10 overflow-y-auto relative">
+  <!-- Decorative Header -->
+  <div class="mb-8 flex items-center gap-4 opacity-70">
+    <div class="h-[1px] bg-[#13ec13] flex-1"></div>
+    <span class="text-xs tracking-widest">DISPLAYING: ROOT/WELCOME.MSG</span>
+    <div class="h-[1px] bg-[#13ec13] flex-1"></div>
+  </div>
+
+  <div class="space-y-6 max-w-3xl mx-auto">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-5xl font-bold mb-4 text-glow tracking-tighter">WELCOME USER</h2>
+      <p class="text-lg md:text-xl opacity-90 font-mono-terminal">
+        &gt; INITIALIZING PORTFOLIO INTERFACE...<br />
+        &gt; LOADING ASSETS...<br />
+        &gt; DONE.
+      </p>
+    </div>
+
+    <!-- Project Card 1 -->
+    <div class="border border-[#13ec13]/50 p-1 hover:border-[#13ec13] transition-colors group">
+      <div class="bg-[#13ec13]/5 p-5 relative overflow-hidden">
+        <div class="absolute top-0 right-0 p-2 opacity-50">
+          <span class="material-symbols-outlined text-4xl">memory</span>
+        </div>
+        <h3 class="text-xl font-bold mb-2 group-hover:underline decoration-2 underline-offset-4">[ PROJECT_ALPHA ]</h3>
+        <p class="text-sm opacity-80 mb-4 font-mono leading-relaxed">
+          Full-stack e-commerce solution architected for high-scalability. Implemented using React, Node.js, and advanced caching strategies.
+        </p>
+        <div class="flex gap-2 text-xs font-bold">
+          <span class="bg-[#13ec13]/20 px-2 py-1">[REACT]</span>
+          <span class="bg-[#13ec13]/20 px-2 py-1">[NODE]</span>
+          <span class="bg-[#13ec13]/20 px-2 py-1">[SQL]</span>
+        </div>
+        <div class="mt-4 flex justify-end">
+          <button type="button" data-nav="projects" class="text-xs bg-[#13ec13] text-[#020502] px-3 py-1 font-bold hover:bg-white hover:text-black transition-colors">
+            EXECUTE &gt;
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Project Card 2 -->
+    <div class="border border-[#13ec13]/50 p-1 hover:border-[#13ec13] transition-colors group mt-4">
+      <div class="bg-[#13ec13]/5 p-5 relative overflow-hidden">
+        <div class="absolute top-0 right-0 p-2 opacity-50">
+          <span class="material-symbols-outlined text-4xl">database</span>
+        </div>
+        <h3 class="text-xl font-bold mb-2 group-hover:underline decoration-2 underline-offset-4">[ DATA_VAULT_UI ]</h3>
+        <p class="text-sm opacity-80 mb-4 font-mono leading-relaxed">
+          Responsive dashboard interface for visualization of complex datasets. Features real-time websocket updates and D3.js charts.
+        </p>
+        <div class="flex gap-2 text-xs font-bold">
+          <span class="bg-[#13ec13]/20 px-2 py-1">[D3.JS]</span>
+          <span class="bg-[#13ec13]/20 px-2 py-1">[VUE]</span>
+          <span class="bg-[#13ec13]/20 px-2 py-1">[AWS]</span>
+        </div>
+        <div class="mt-4 flex justify-end">
+          <button type="button" data-nav="projects" class="text-xs bg-[#13ec13] text-[#020502] px-3 py-1 font-bold hover:bg-white hover:text-black transition-colors">
+            EXECUTE &gt;
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-12 border-t border-dashed border-[#13ec13]/30 pt-4 text-center text-xs opacity-60">
+    <p>*** END OF MESSAGE ***</p>
+  </div>
+</main>

@@ -1,0 +1,101 @@
+---
+interface Props {
+  onEnter?: string;
+}
+
+const { onEnter = "enter-terminal" } = Astro.props;
+---
+
+<div class="relative w-full h-screen flex flex-col p-4 md:p-12 lg:p-20 max-w-[1400px] mx-auto z-10 animate-flicker">
+  <!-- Top Status Bar -->
+  <div class="flex justify-between items-center border-b-2 border-[#13ec13]/40 pb-2 mb-8 text-glow uppercase tracking-widest text-xs md:text-sm">
+    <span class="flex items-center gap-2">
+      <span class="material-symbols-outlined text-sm">terminal</span>
+      ROBCO TERMINAL LINK
+    </span>
+    <span>V 4.2.1</span>
+  </div>
+
+  <!-- Main Terminal Area -->
+  <div class="flex-grow flex flex-col justify-center items-center relative">
+    <!-- ASCII Logo -->
+    <div class="mb-12 text-center hidden md:block opacity-90 text-glow select-none">
+      <pre class="font-mono-terminal text-[10px] md:text-xs leading-[0.8] text-[#13ec13]/80">      _______  _______  ______   _______  _______ 
+     (  ____ )(  ___  )(  ___ \ (  ____ \(  ___  )
+     | (    )|| (   ) || (   ) )| (    \/| (   ) |
+     | (____)|| |   | || (__/ / | |      | |   | |
+     |     __)| |   | ||  __ (  | |      | |   | |
+     | (\ (   | |   | || (  \ \ | |      | |   | |
+     | ) \ \__| (___) || )___) )| (____/\| (___) |
+     |/   \__/(_______)|/ \___/ (_______/(_______)
+            INDUSTRIES (TM) UNIFIED OPERATING SYSTEM
+                COPYRIGHT 2077 - 2078</pre>
+    </div>
+
+    <!-- Mobile Logo -->
+    <div class="mb-8 text-center md:hidden text-glow">
+      <h1 class="text-4xl font-bold tracking-tighter border-4 border-[#13ec13] p-2 inline-block">ROBCO</h1>
+      <p class="text-xs tracking-[0.3em] mt-2">INDUSTRIES (TM)</p>
+    </div>
+
+    <!-- Boot Sequence Text -->
+    <div class="w-full max-w-2xl font-mono-terminal text-lg md:text-xl tracking-wide space-y-2 mb-12">
+      <div class="flex items-start">
+        <span class="mr-2">&gt;</span>
+        <p class="typing-1 border-r-2 border-[#13ec13]/0">BOOTING LOADER V4.2.1...</p>
+      </div>
+      <div class="flex items-start">
+        <span class="mr-2">&gt;</span>
+        <p class="typing-2 border-r-2 border-[#13ec13]/0">MEMORY CHECK: 640KB OK</p>
+      </div>
+      <div class="flex items-start">
+        <span class="mr-2">&gt;</span>
+        <p class="typing-3 border-r-2 border-[#13ec13]/0">ESTABLISHING LINK TO CENTRAL MAINFRAME...</p>
+      </div>
+      <div class="flex items-start">
+        <span class="mr-2">&gt;</span>
+        <p class="typing-4 border-r-2 border-[#13ec13]/0">LOADING BIOS...</p>
+      </div>
+      <div class="flex items-start text-[#13ec13] font-bold">
+        <span class="mr-2">&gt;</span>
+        <p class="typing-5 border-r-2 border-[#13ec13]/0 animate-pulse">[PROTECTRON PROTOCOLS ACTIVE]</p>
+      </div>
+    </div>
+
+    <!-- Loading Bar -->
+    <div class="w-full max-w-lg fade-in-delayed">
+      <div class="flex justify-between text-xs mb-1 font-mono-terminal uppercase tracking-widest opacity-80">
+        <span>System Initialization</span>
+        <span>100%</span>
+      </div>
+      <div class="h-6 md:h-8 w-full border-2 border-[#13ec13] p-1 box-glow relative overflow-hidden">
+        <div class="absolute inset-0 opacity-20" style="background-image: repeating-linear-gradient(90deg, transparent 0, transparent 10px, #13ec13 10px, #13ec13 12px);"></div>
+        <div class="h-full bg-[#13ec13] progress-bar-fill relative">
+          <div class="absolute inset-0 bg-white/20 w-full h-[1px] top-1/2 -translate-y-1/2"></div>
+        </div>
+      </div>
+      <div class="mt-2 text-right font-mono-terminal text-xs opacity-60">0x84F2A9 :: COMPLETE</div>
+    </div>
+  </div>
+
+  <!-- Footer / Call to Action -->
+  <div class="mt-auto pt-8 flex flex-col items-center justify-center fade-in-delayed" style="animation-delay: 5s;">
+    <button
+      type="button"
+      id={onEnter}
+      class="group relative px-8 py-3 bg-[#13ec13]/10 hover:bg-[#13ec13]/20 border border-[#13ec13] text-[#13ec13] font-bold tracking-widest uppercase transition-all duration-300 hover:shadow-[0_0_20px_rgba(19,236,19,0.4)] focus:outline-none focus:ring-2 focus:ring-[#13ec13] focus:ring-offset-2 focus:ring-offset-black"
+    >
+      <span class="absolute top-0 left-0 w-2 h-2 border-t-2 border-l-2 border-[#13ec13] -mt-1 -ml-1"></span>
+      <span class="absolute top-0 right-0 w-2 h-2 border-t-2 border-r-2 border-[#13ec13] -mt-1 -mr-1"></span>
+      <span class="absolute bottom-0 left-0 w-2 h-2 border-b-2 border-l-2 border-[#13ec13] -mb-1 -ml-1"></span>
+      <span class="absolute bottom-0 right-0 w-2 h-2 border-b-2 border-r-2 border-[#13ec13] -mb-1 -mr-1"></span>
+      <span class="flex items-center gap-3">
+        <span class="material-symbols-outlined animate-pulse">power_settings_new</span>
+        Enter Terminal
+      </span>
+    </button>
+    <p class="mt-4 text-sm font-mono-terminal opacity-70 animate-pulse">
+      &gt; PRESS ANY KEY TO CONTINUE <span class="inline-block w-3 h-5 bg-[#13ec13] align-middle ml-1 cursor-blink"></span>
+    </p>
+  </div>
+</div>

@@ -1,0 +1,121 @@
+@import "tailwindcss";
+
+/* Fonts */
+.font-display { font-family: "Space Grotesk", monospace; }
+.font-mono-terminal { font-family: "VT323", monospace; }
+
+/* Fallout 4 Terminal Theme - Tailwind v4 @theme */
+@theme {
+  --color-primary: #13ec13;
+  --color-primary-dim: #0e850e;
+  --color-background-dark: #020502;
+  --color-background-terminal: #0a110a;
+  --color-background-dim: #0c160c;
+  
+  --font-display: "Space Grotesk", monospace;
+  --font-mono: "VT323", monospace;
+  
+  --animate-flicker: flicker 0.15s infinite;
+  --animate-scanline: scanline 8s linear infinite;
+  --animate-blink: blink 1s step-end infinite;
+  --animate-pulse-fast: pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  --animate-typewriter: typewriter 2s steps(40) 1s 1 normal both;
+  
+  @keyframes flicker {
+    0%, 100% { opacity: 0.97; }
+    50% { opacity: 1; }
+  }
+  @keyframes scanline {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100%); }
+  }
+  @keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+  }
+  @keyframes typing {
+    from { width: 0; opacity: 1; }
+    to { width: 100%; opacity: 1; }
+  }
+  @keyframes fadeIn {
+    to { opacity: 1; }
+  }
+  @keyframes progressFill {
+    0% { width: 0%; }
+    20% { width: 15%; }
+    40% { width: 30%; }
+    60% { width: 70%; }
+    80% { width: 85%; }
+    100% { width: 100%; }
+  }
+  @keyframes powerOn {
+    0% { opacity: 0; filter: brightness(0); }
+    50% { opacity: 0.5; filter: brightness(0.5); }
+    100% { opacity: 1; filter: brightness(1); }
+  }
+  @keyframes phosphorGlow {
+    0%, 100% { text-shadow: 0 0 4px rgba(19, 236, 19, 0.7), 0 0 10px rgba(19, 236, 19, 0.4); }
+    50% { text-shadow: 0 0 6px rgba(19, 236, 19, 0.9), 0 0 15px rgba(19, 236, 19, 0.6); }
+  }
+}
+
+/* CRT & Terminal Effects */
+.crt-overlay {
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+  background-size: 100% 4px;
+  pointer-events: none;
+}
+
+.crt-vignette {
+  background: radial-gradient(
+    circle,
+    rgba(19, 236, 19, 0) 60%,
+    rgba(0, 0, 0, 0.4) 90%,
+    rgba(0, 0, 0, 0.8) 100%
+  );
+  pointer-events: none;
+}
+
+.text-glow {
+  text-shadow: 0 0 4px rgba(19, 236, 19, 0.7), 0 0 10px rgba(19, 236, 19, 0.5);
+}
+
+.box-glow {
+  box-shadow: 0 0 15px rgba(19, 236, 19, 0.2), inset 0 0 15px rgba(19, 236, 19, 0.1);
+}
+
+.cursor-blink {
+  animation: blink 1s step-end infinite;
+}
+
+.animate-flicker {
+  animation: flicker 0.15s infinite;
+}
+
+/* Typewriter animations for boot sequence */
+.typing-1 { animation: typing 0.5s steps(30, end) forwards; opacity: 0; animation-delay: 0.2s; animation-fill-mode: forwards; white-space: nowrap; overflow: hidden; }
+.typing-2 { animation: typing 1s steps(30, end) forwards; opacity: 0; animation-delay: 0.8s; animation-fill-mode: forwards; white-space: nowrap; overflow: hidden; }
+.typing-3 { animation: typing 1s steps(40, end) forwards; opacity: 0; animation-delay: 2s; animation-fill-mode: forwards; white-space: nowrap; overflow: hidden; }
+.typing-4 { animation: typing 0.5s steps(20, end) forwards; opacity: 0; animation-delay: 3.2s; animation-fill-mode: forwards; white-space: nowrap; overflow: hidden; }
+.typing-5 { animation: typing 0.5s steps(20, end) forwards; opacity: 0; animation-delay: 3.8s; animation-fill-mode: forwards; white-space: nowrap; overflow: hidden; }
+
+.fade-in-delayed {
+  opacity: 0;
+  animation: fadeIn 0.5s forwards;
+  animation-delay: 4.5s;
+}
+
+.progress-bar-fill {
+  animation: progressFill 4s steps(10, end) forwards;
+  animation-delay: 1s;
+  width: 0%;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar { width: 12px; }
+::-webkit-scrollbar-track { background: var(--color-background-dark); }
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border: 2px solid var(--color-background-dark);
+}
+::-webkit-scrollbar-thumb:hover { background: #0fb30f; }
