@@ -24,13 +24,51 @@ import TerminalFooter from '../components/TerminalFooter.astro';
 
     <!-- Home / Main Terminal -->
     <div id="home-view" class="fixed inset-0 z-20 flex flex-col" style="display: none;">
-      <div class="w-full h-full max-w-[1200px] mx-auto border-2 border-[#13ec13]/30 rounded-lg flex flex-col relative bg-[#0a110a] shadow-[0_0_20px_rgba(19,236,19,0.15)] overflow-hidden">
-        <TerminalHeader showLogout={true} />
-        <div class="flex-1 flex flex-col lg:flex-row overflow-hidden">
-          <MainMenu activeItem="" />
-          <HomeContent />
+      <div class="relative z-10 flex flex-col h-screen w-full p-4 md:p-8 max-w-[1600px] mx-auto">
+        <header class="flex flex-col md:flex-row items-start md:items-center justify-between border-b-2 border-[#13ec13]/40 pb-4 mb-6 gap-4">
+          <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-4xl animate-pulse text-glow">terminal</span>
+            <div>
+              <h1 class="text-xl md:text-2xl font-bold tracking-widest text-glow">ROBCO INDUSTRIES (TM)</h1>
+              <p class="text-xs tracking-[0.2em] opacity-80">UNIFIED OPERATING SYSTEM // TERMLINK PROTOCOL</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-4 text-sm font-bold tracking-widest">
+            <div class="hidden md:flex flex-col items-end">
+              <span class="text-xs opacity-60">COPYRIGHT 2077</span>
+              <span>CLEARANCE: ADMINISTRATOR</span>
+            </div>
+            <div class="h-8 w-[2px] bg-[#13ec13]/40 hidden md:block"></div>
+            <button type="button" id="logout-btn" class="group flex items-center gap-2 hover:bg-[#13ec13] hover:text-[#020502] px-3 py-1 transition-colors border border-transparent hover:border-[#13ec13] rounded">
+              <span>LOGOUT</span>
+              <span class="material-symbols-outlined text-sm">logout</span>
+            </button>
+          </div>
+        </header>
+        <div class="flex-1 flex flex-col lg:flex-row gap-6 overflow-hidden min-h-0">
+          <aside class="w-full lg:w-1/4 flex flex-col border-2 border-[#13ec13]/30 bg-[#020502]/50 backdrop-blur-sm rounded-lg overflow-hidden shrink-0 min-h-0">
+            <MainMenu activeItem="" embedded={true} />
+          </aside>
+          <section class="flex-1 flex flex-col border-2 border-[#13ec13]/30 bg-[#020502]/50 backdrop-blur-sm rounded-lg overflow-hidden min-h-0">
+            <HomeContent />
+          </section>
         </div>
-        <TerminalFooter showHints={false} />
+        <div class="mt-4 py-2 px-4 flex items-center border border-[#13ec13]/30 rounded bg-[#020502]/50 font-mono text-sm">
+          <span class="mr-2 font-bold text-[#13ec13] shrink-0">ADMIN@TERMINAL:~$</span>
+          <input type="text" id="terminal-input" autocomplete="off" class="bg-transparent border-none text-[#13ec13] focus:ring-0 p-0 w-full font-mono placeholder-[#13ec13]/50 uppercase min-w-0" placeholder="ENTER COMMAND..." />
+          <span class="w-3 h-5 bg-[#13ec13] ml-1 cursor-blink inline-block shrink-0" aria-hidden="true"></span>
+        </div>
+        <footer class="mt-4 pt-4 border-t border-[#13ec13]/30 flex flex-wrap justify-between items-center text-xs md:text-sm font-bold tracking-widest uppercase gap-4">
+          <div class="flex gap-6">
+            <span class="flex items-center gap-1 opacity-70"><span class="bg-[#13ec13]/20 px-1 rounded">[TAB]</span> NEXT</span>
+            <span class="flex items-center gap-1 opacity-70"><span class="bg-[#13ec13]/20 px-1 rounded">[ENTER]</span> EXECUTE</span>
+            <span class="flex items-center gap-1 opacity-70"><span class="bg-[#13ec13]/20 px-1 rounded">[ESC]</span> BACK</span>
+          </div>
+          <div class="flex items-center gap-2 opacity-60">
+            <span class="w-2 h-2 rounded-full bg-[#13ec13] animate-pulse"></span>
+            SYSTEM ONLINE
+          </div>
+        </footer>
       </div>
     </div>
 
@@ -78,37 +116,106 @@ import TerminalFooter from '../components/TerminalFooter.astro';
 
     <!-- Skills DB Page -->
     <div id="skills-view" class="fixed inset-0 z-20 flex flex-col" style="display: none;">
-      <div class="w-full h-full max-w-[1200px] mx-auto border-2 border-[#13ec13]/30 rounded-lg flex flex-col relative bg-[#0a110a] shadow-[0_0_20px_rgba(19,236,19,0.15)] overflow-hidden">
-        <TerminalHeader showLogout={false} showBack={true} backButtonId="skills-back-btn" />
-        <div class="flex-1 flex flex-col lg:flex-row overflow-hidden">
-          <MainMenu activeItem="skills" />
-          <SkillsDb />
+      <div class="relative z-10 flex flex-col h-screen w-full p-4 md:p-8 max-w-[1600px] mx-auto">
+        <header class="flex flex-col md:flex-row items-start md:items-center justify-between border-b-2 border-[#13ec13]/40 pb-4 mb-6 gap-4">
+          <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-4xl animate-pulse text-glow">terminal</span>
+            <div>
+              <h1 class="text-xl md:text-2xl font-bold tracking-widest text-glow">ROBCO INDUSTRIES (TM)</h1>
+              <p class="text-xs tracking-[0.2em] opacity-80">UNIFIED OPERATING SYSTEM // TERMLINK PROTOCOL</p>
+            </div>
+          </div>
+          <button type="button" id="skills-back-btn" class="group flex items-center gap-2 hover:bg-[#13ec13] hover:text-[#020502] px-3 py-1 transition-colors border border-transparent hover:border-[#13ec13] rounded text-sm font-bold">
+            <span class="material-symbols-outlined text-sm">arrow_back</span> BACK
+          </button>
+        </header>
+        <div class="flex-1 flex flex-col lg:flex-row gap-6 overflow-hidden min-h-0">
+          <aside class="w-full lg:w-1/4 flex flex-col border-2 border-[#13ec13]/30 bg-[#020502]/50 backdrop-blur-sm rounded-lg overflow-hidden shrink-0 min-h-0">
+            <MainMenu activeItem="skills" embedded={true} />
+          </aside>
+          <section class="flex-1 flex flex-col border-2 border-[#13ec13]/30 bg-[#020502]/50 backdrop-blur-sm rounded-lg overflow-hidden min-h-0">
+            <SkillsDb />
+          </section>
         </div>
-        <TerminalFooter showHints={true} />
+        <footer class="mt-6 pt-4 border-t border-[#13ec13]/30 flex flex-wrap justify-between items-center text-xs md:text-sm font-bold tracking-widest uppercase gap-4">
+          <div class="flex gap-6">
+            <span class="flex items-center gap-1 opacity-70"><span class="bg-[#13ec13]/20 px-1 rounded">[ESC]</span> BACK</span>
+          </div>
+          <div class="flex items-center gap-2 opacity-60">
+            <span class="w-2 h-2 rounded-full bg-[#13ec13] animate-pulse"></span>
+            SYSTEM ONLINE
+          </div>
+        </footer>
       </div>
     </div>
 
     <!-- About User Page -->
     <div id="about-view" class="fixed inset-0 z-20 flex flex-col" style="display: none;">
-      <div class="w-full h-full max-w-[1200px] mx-auto border-2 border-[#13ec13]/30 rounded-lg flex flex-col relative bg-[#0a110a] shadow-[0_0_20px_rgba(19,236,19,0.15)] overflow-hidden">
-        <TerminalHeader showLogout={false} showBack={true} backButtonId="about-back-btn" />
-        <div class="flex-1 flex flex-col lg:flex-row overflow-hidden">
-          <MainMenu activeItem="about" />
-          <AboutUser />
+      <div class="relative z-10 flex flex-col h-screen w-full p-4 md:p-8 max-w-[1600px] mx-auto">
+        <header class="flex flex-col md:flex-row items-start md:items-center justify-between border-b-2 border-[#13ec13]/40 pb-4 mb-6 gap-4">
+          <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-4xl animate-pulse text-glow">terminal</span>
+            <div>
+              <h1 class="text-xl md:text-2xl font-bold tracking-widest text-glow">ROBCO INDUSTRIES (TM)</h1>
+              <p class="text-xs tracking-[0.2em] opacity-80">UNIFIED OPERATING SYSTEM // TERMLINK PROTOCOL</p>
+            </div>
+          </div>
+          <button type="button" id="about-back-btn" class="group flex items-center gap-2 hover:bg-[#13ec13] hover:text-[#020502] px-3 py-1 transition-colors border border-transparent hover:border-[#13ec13] rounded text-sm font-bold">
+            <span class="material-symbols-outlined text-sm">arrow_back</span> BACK
+          </button>
+        </header>
+        <div class="flex-1 flex flex-col lg:flex-row gap-6 overflow-hidden min-h-0">
+          <aside class="w-full lg:w-1/4 flex flex-col border-2 border-[#13ec13]/30 bg-[#020502]/50 backdrop-blur-sm rounded-lg overflow-hidden shrink-0 min-h-0">
+            <MainMenu activeItem="about" embedded={true} />
+          </aside>
+          <section class="flex-1 flex flex-col border-2 border-[#13ec13]/30 bg-[#020502]/50 backdrop-blur-sm rounded-lg overflow-hidden min-h-0">
+            <AboutUser />
+          </section>
         </div>
-        <TerminalFooter showHints={true} />
+        <footer class="mt-6 pt-4 border-t border-[#13ec13]/30 flex flex-wrap justify-between items-center text-xs md:text-sm font-bold tracking-widest uppercase gap-4">
+          <div class="flex gap-6">
+            <span class="flex items-center gap-1 opacity-70"><span class="bg-[#13ec13]/20 px-1 rounded">[ESC]</span> BACK</span>
+          </div>
+          <div class="flex items-center gap-2 opacity-60">
+            <span class="w-2 h-2 rounded-full bg-[#13ec13] animate-pulse"></span>
+            SYSTEM ONLINE
+          </div>
+        </footer>
       </div>
     </div>
 
     <!-- Comms Link Page -->
     <div id="comms-view" class="fixed inset-0 z-20 flex flex-col" style="display: none;">
-      <div class="w-full h-full max-w-[1200px] mx-auto border-2 border-[#13ec13]/30 rounded-lg flex flex-col relative bg-[#0a110a] shadow-[0_0_20px_rgba(19,236,19,0.15)] overflow-hidden">
-        <TerminalHeader showLogout={false} showBack={true} backButtonId="comms-back-btn" />
-        <div class="flex-1 flex flex-col lg:flex-row overflow-hidden">
-          <MainMenu activeItem="comms" />
-          <CommsLink />
+      <div class="relative z-10 flex flex-col h-screen w-full p-4 md:p-8 max-w-[1600px] mx-auto">
+        <header class="flex flex-col md:flex-row items-start md:items-center justify-between border-b-2 border-[#13ec13]/40 pb-4 mb-6 gap-4">
+          <div class="flex items-center gap-3">
+            <span class="material-symbols-outlined text-4xl animate-pulse text-glow">terminal</span>
+            <div>
+              <h1 class="text-xl md:text-2xl font-bold tracking-widest text-glow">ROBCO INDUSTRIES (TM)</h1>
+              <p class="text-xs tracking-[0.2em] opacity-80">UNIFIED OPERATING SYSTEM // TERMLINK PROTOCOL</p>
+            </div>
+          </div>
+          <button type="button" id="comms-back-btn" class="group flex items-center gap-2 hover:bg-[#13ec13] hover:text-[#020502] px-3 py-1 transition-colors border border-transparent hover:border-[#13ec13] rounded text-sm font-bold">
+            <span class="material-symbols-outlined text-sm">arrow_back</span> BACK
+          </button>
+        </header>
+        <div class="flex-1 flex flex-col lg:flex-row gap-6 overflow-hidden min-h-0">
+          <aside class="w-full lg:w-1/4 flex flex-col border-2 border-[#13ec13]/30 bg-[#020502]/50 backdrop-blur-sm rounded-lg overflow-hidden shrink-0 min-h-0">
+            <MainMenu activeItem="comms" embedded={true} />
+          </aside>
+          <section class="flex-1 flex flex-col border-2 border-[#13ec13]/30 bg-[#020502]/50 backdrop-blur-sm rounded-lg overflow-hidden min-h-0">
+            <CommsLink />
+          </section>
         </div>
-        <TerminalFooter showHints={true} />
+        <footer class="mt-6 pt-4 border-t border-[#13ec13]/30 flex flex-wrap justify-between items-center text-xs md:text-sm font-bold tracking-widest uppercase gap-4">
+          <div class="flex gap-6">
+            <span class="flex items-center gap-1 opacity-70"><span class="bg-[#13ec13]/20 px-1 rounded">[ESC]</span> BACK</span>
+          </div>
+          <div class="flex items-center gap-2 opacity-60">
+            <span class="w-2 h-2 rounded-full bg-[#13ec13] animate-pulse"></span>
+            SYSTEM ONLINE
+          </div>
+        </footer>
       </div>
     </div>
   </div>
