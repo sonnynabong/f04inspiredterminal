@@ -22,7 +22,7 @@ const projects = [
           type="button"
           data-project={project.id}
           class:list={[
-            "w-full text-left p-3 flex items-center justify-between group rounded transition-all border",
+            "press-feedback w-full text-left p-3 flex items-center justify-between group rounded transition-all border",
             project.active
               ? "bg-[#13ec13] text-[#020502] font-bold border-transparent hover:bg-[#13ec13] hover:text-[#020502]"
               : "hover:bg-[#13ec13]/20 text-[#13ec13]/70 hover:text-[#13ec13] font-medium border-transparent hover:border-[#13ec13]/30"
@@ -140,11 +140,11 @@ const projects = [
           </div>
 
           <div class="flex gap-4 pt-4">
-            <button type="button" class="flex-1 bg-[#13ec13] text-[#020502] font-bold py-3 px-6 rounded hover:bg-white hover:text-black transition-colors flex items-center justify-center gap-2 text-sm md:text-base">
+            <button type="button" class="press-feedback flex-1 bg-[#13ec13] text-[#020502] font-bold py-3 px-6 rounded hover:bg-white hover:text-black transition-colors flex items-center justify-center gap-2 text-sm md:text-base">
               <span class="material-symbols-outlined">play_arrow</span>
               EXECUTE_DEMO
             </button>
-            <button type="button" class="flex-1 border border-[#13ec13] text-[#13ec13] font-bold py-3 px-6 rounded hover:bg-[#13ec13]/20 transition-colors flex items-center justify-center gap-2 text-sm md:text-base">
+            <button type="button" class="press-feedback flex-1 border border-[#13ec13] text-[#13ec13] font-bold py-3 px-6 rounded hover:bg-[#13ec13]/20 transition-colors flex items-center justify-center gap-2 text-sm md:text-base">
               <span class="material-symbols-outlined">code_blocks</span>
               VIEW_SOURCE
             </button>

@@ -78,12 +78,12 @@ const { onEnter = "enter-terminal" } = Astro.props;
     </div>
   </div>
 
-  <!-- Footer / Call to Action -->
-  <div class="mt-auto pt-8 flex flex-col items-center justify-center fade-in-delayed" style="animation-delay: 5s;">
+  <!-- Footer / Call to Action (appears after boot sequence) -->
+  <div class="mt-auto pt-8 flex flex-col items-center justify-center fade-in-delayed pointer-events-auto" style="animation-delay: 3.5s;">
     <button
       type="button"
       id={onEnter}
-      class="group relative px-8 py-3 bg-[#13ec13]/10 hover:bg-[#13ec13]/20 border border-[#13ec13] text-[#13ec13] font-bold tracking-widest uppercase transition-all duration-300 hover:shadow-[0_0_20px_rgba(19,236,19,0.4)] focus:outline-none focus:ring-2 focus:ring-[#13ec13] focus:ring-offset-2 focus:ring-offset-black"
+      class="press-feedback group relative px-8 py-3 bg-[#13ec13]/10 hover:bg-[#13ec13]/20 border border-[#13ec13] text-[#13ec13] font-bold tracking-widest uppercase transition-all duration-300 hover:shadow-[0_0_20px_rgba(19,236,19,0.4)] focus:outline-none focus:ring-2 focus:ring-[#13ec13] focus:ring-offset-2 focus:ring-offset-black"
     >
       <span class="absolute top-0 left-0 w-2 h-2 border-t-2 border-l-2 border-[#13ec13] -mt-1 -ml-1"></span>
       <span class="absolute top-0 right-0 w-2 h-2 border-t-2 border-r-2 border-[#13ec13] -mt-1 -mr-1"></span>

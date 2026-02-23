@@ -75,60 +75,64 @@ function init() {
     document.body.setAttribute("data-view", "boot");
     initBootTypingSounds();
   }
-  const enterBtn = document.getElementById("enter-terminal");
-  const logoutBtn = document.getElementById("logout-btn");
-  const archivesBackBtn = document.getElementById("archives-back-btn");
-  const skillsBackBtn = document.getElementById("skills-back-btn");
-  const aboutBackBtn = document.getElementById("about-back-btn");
-  const commsBackBtn = document.getElementById("comms-back-btn");
-  const navButtons = document.querySelectorAll("[data-nav]");
-  const projectButtons = document.querySelectorAll("[data-project]");
+
   const terminalInput = document.getElementById("terminal-input") as HTMLInputElement | null;
 
-  // Enter terminal from boot screen
-  enterBtn?.addEventListener("click", () => {
-    playPowerOn();
-    showView("home");
-  });
+  // Press feedback for touch devices (:active doesn't work well on mobile)
+  document.addEventListener("touchstart", (e) => {
+    const el = (e.target as HTMLElement).closest(".press-feedback");
+    if (el) el.classList.add("press-active");
+  }, { passive: true });
+  document.addEventListener("touchend", (e) => {
+    const el = (e.target as HTMLElement).closest(".press-feedback");
+    if (el) el.classList.remove("press-active");
+  }, { passive: true });
+  document.addEventListener("touchcancel", (e) => {
+    const el = (e.target as HTMLElement).closest(".press-feedback");
+    if (el) el.classList.remove("press-active");
+  }, { passive: true });
 
-  // Logout goes back to boot
-  logoutBtn?.addEventListener("click", () => {
-    playPowerOff();
-    showView("boot");
-  });
+  // Use event delegation for reliable click handling (works with dynamically visible elements)
+  document.addEventListener("click", (e) => {
+    const target = e.target as HTMLElement;
+    const enterBtn = target.closest("#enter-terminal");
+    const logoutBtn = target.closest("#logout-btn");
+    const backBtn = target.closest("#archives-back-btn, #skills-back-btn, #about-back-btn, #comms-back-btn");
+    const navBtn = target.closest("[data-nav]");
+    const projectBtn = target.closest("[data-project]");
 
-  // Back to home
-  [archivesBackBtn, skillsBackBtn, aboutBackBtn, commsBackBtn].forEach((btn) => {
-    btn?.addEventListener("click", () => {
+    if (enterBtn) {
+      e.preventDefault();
+      playPowerOn();
+      showView("home");
+      return;
+    }
+    if (logoutBtn) {
+      playPowerOff();
+      showView("boot");
+      return;
+    }
+    if (backBtn) {
       playSelect();
       showView("home");
-    });
-  });
-
-  // Main menu nav
-  navButtons.forEach((btn) => {
-    btn.addEventListener("click", () => {
+      return;
+    }
+    if (navBtn) {
       playSelect();
-      btn.classList.add("nav-item-active");
-      setTimeout(() => btn.classList.remove("nav-item-active"), 300);
-      const nav = (btn as HTMLElement).dataset.nav;
+      navBtn.classList.add("nav-item-active");
+      setTimeout(() => navBtn.classList.remove("nav-item-active"), 300);
+      const nav = (navBtn as HTMLElement).dataset.nav;
       if (nav === "projects") showView("archives");
       if (nav === "skills") showView("skills");
       if (nav === "about") showView("about");
       if (nav === "comms") showView("comms");
-    });
-  });
-
-  // Project selection in archives - visual feedback
-  projectButtons.forEach((btn) => {
-    btn.addEventListener("click", () => {
-      const project = (btn as HTMLElement).dataset.project;
-      if (project && !btn.classList.contains("opacity-50")) {
-        playSelect();
-        btn.classList.add("nav-item-active");
-        setTimeout(() => btn.classList.remove("nav-item-active"), 300);
-      }
-    });
+      return;
+    }
+    if (projectBtn && !projectBtn.classList.contains("opacity-50")) {
+      playSelect();
+      projectBtn.classList.add("nav-item-active");
+      setTimeout(() => projectBtn.classList.remove("nav-item-active"), 300);
+    }
   });
 
   // Keyboard: Any key on boot to continue
